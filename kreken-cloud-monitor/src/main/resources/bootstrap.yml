@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    config:
+      uri: http://admin:admin@www.gapah.com:8763/eureka/,http://admin:admin@www.gapah.cn:8762/eureka/
+      label: master
+      profile: ${spring.profiles.active:dev}
+    inetutils:
+      ignoredInterfaces:
+        - docker0
+        - veth.*
+        - VM.*

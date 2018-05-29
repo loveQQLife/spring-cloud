@@ -1,0 +1,65 @@
+server:
+  port: 7777
+spring:
+  application:
+    name: zuul-app
+  http:
+    encoding:
+      charset: UTF-8
+  redis:
+    host: 127.0.0.1
+    password:
+    timeout: 3000
+  session:
+    store-type: redis
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@www.gapah.com:8763/eureka/,http://admin:admin@www.gapah.cn:8762/eureka/,http://admin:admin@www.gapah.net:8764/eureka/
+  instance:
+      instance-id: ${spring.application.name}
+      hostname: 127.0.0.1
+      prefer-ip-address: true
+zuul:
+  host:
+    connect-timeout-millis: 6000
+    socket-timeout-millis: 6000
+    max-per-route-connections: 50
+  force-original-query-string-encoding: true
+  routes:
+    back-route:
+        path: /back/**
+        sensitiveHeaders:
+        strip-prefix: false
+        service-id: kreken-provider-uc
+        ribbon:
+          eager-load:
+            enabled: true
+          MaxAutoRetries: 1
+          MaxAutoRetriesNextServer: 2
+          OkToRetryOnAllOperations: false
+          ConnectTimeout: 10000
+          ReadTimeout: 10000
+    front-route:
+        path: /front/**
+        sensitiveHeaders:
+        strip-prefix: false
+        service-id: kreken-provider-uc
+        ribbon:
+          eager-load:
+            enabled: true
+          MaxAutoRetries: 1
+          MaxAutoRetriesNextServer: 2
+          OkToRetryOnAllOperations: false
+          ConnectTimeout: 10000
+          ReadTimeout: 10000
+  ribbon-isolation-strategy: thread
+management:
+  security:
+    enabled: false
+security:
+  basic:
+    enabled: false
+  user:
+    name: admin
+    password: admin

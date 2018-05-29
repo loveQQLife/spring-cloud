@@ -1,0 +1,38 @@
+server:
+  port: 9091
+spring:
+  application:
+    name: user-service #应用名称
+  output: #out ansi
+    ansi:
+      enabled: always
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@www.gapah.com:8763/eureka/,http://admin:admin@www.gapah.cn:8762/eureka/,http://admin:admin@www.gapah.net:8764/eureka/
+  instance:
+      instance-id: ${spring.application.name}
+      hostname: 127.0.0.1
+      prefer-ip-address: true
+feign: #open feign config ,default false
+  hystrix:
+    enabled: true
+  httpclient:
+    connection-timeout: 2000
+hystrix:
+  metrics:
+    enabled: true
+management:
+  endpoint:
+    hystrix:
+      stream:
+        enabled: true
+ribbon:
+  eager-load:
+    enabled: true
+security:
+  basic:
+    enabled: false
+  user:
+    name: admin
+    password: admin

@@ -1,0 +1,46 @@
+server:
+  port: 8030
+  tomcat:
+    uri-encoding: UTF-8
+    remote-ip-header: x-forwarded-for
+  use-forward-headers: true
+spring:
+  application:
+    name: @pom.artifactId@
+  profiles:
+    active: @profileActive@
+  boot:
+    admin:
+      username: admin
+      password: admin
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
+    timeout: 1000
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://111.230.107.89:3307/user?characterEncoding=utf8&useSSL=false
+    username: user
+    password: 123456
+    filters: stat,wall
+    druid:
+      initial-size: 10
+      min-idle: 10
+      max-active: 30
+      test-on-borrow: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      web-stat-filter:
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      stat-view-servlet:
+        allow:
+        login-username: admin
+        login-password: admin
+  session:
+    store-type: redis
+  config:
+    name: @pom.artifactId@
+info:
+  owner: interface.tolay@gmail.com
+  version: @project.version@
