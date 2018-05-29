@@ -1,0 +1,33 @@
+server:
+  port: 8764
+spring:
+  profiles:
+    active: @profileActive@
+  application:
+    name: @pom.artifactId@
+eureka:
+  server:
+    enable-self-preservation: false
+    batch-replication: true
+  instance:
+    hostname: www.gapah.net
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 30
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://${security.user.name}:${security.user.password}@www.gapah.com:8763/eureka/,http://${security.user.name}:${security.user.password}@www.gapah.cn:8762/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+    instance-info-replication-interval-seconds: 30
+    initial-instance-info-replication-interval-seconds: 40
+security:
+  basic:
+    enabled: true
+  user:
+    name: admin
+    password: admin
+logging:
+  level.root: info
+  path: logs/
+  file: ${spring.application.name}.log

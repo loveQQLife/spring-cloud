@@ -1,0 +1,14 @@
+server:
+  port: 8181
+spring:
+  profiles: svn
+  config:
+    name: config-center
+  cloud:
+    config:
+      server:
+        svn:
+          default-label: trunk
+          username: zhanghuacheng
+          password: 123456
+          uri: https://111.230.107.89:9000/svn/kreken-cloud-master/
